@@ -23,3 +23,20 @@ exports.charAt = function(str, offset) {
 
   return '';
 }
+
+exports.reverse = function(str) {
+  var pos = 0;
+  var length = str.length;
+  var cp = 0;
+  var size = 0;
+  var ret = '';
+
+  while (pos < length) {
+    cp = str.codePointAt(pos);
+    size = cp < 0x10000 ? 1 : 2;
+    ret  = str.substr(pos, size) + ret;
+    pos += size;
+  }
+
+  return ret;
+}
