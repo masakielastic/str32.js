@@ -1,0 +1,6 @@
+{
+  "name": "node-strutils",
+  "license": "MIT",
+  "description": "String Utils for Surrogate pairs",
+  "version": "0.1.0"
+}
