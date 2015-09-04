@@ -66,32 +66,4 @@ StrUtils.prototype.substr = function(str, pos, length) {
     return ret;
 };
 
-StrUtils.prototype.eachChar = function(str, callback) {
-    var pos = 0;
-    var length = str.length;
-    var cp = 0;
-    var size = 0;
-
-    while (pos < length) {
-        cp = str.codePointAt(pos);
-        size = cp < 0x10000 ? 1 : 2;
-        callback(str.substr(pos, size));
-        pos += size;
-    }
-};
-
-StrUtils.prototype.eachCodePoint = function(str, callback) {
-    var pos = 0;
-    var length = str.length;
-    var cp = 0;
-    var size = 0;
-
-    while (pos < length) {
-        cp = str.codePointAt(pos);
-        size = cp < 0x10000 ? 1 : 2;
-        callback(cp);
-        pos += size;
-    }
-};
-
 module.exports = new StrUtils;
