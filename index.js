@@ -1,69 +1,97 @@
 function StrUtils() {
-  if (!(this instanceof StrUtils)) {
-    return new StrUtils();
-  }
+    if (!(this instanceof StrUtils)) {
+      return new StrUtils();
+    }
 };
 
 StrUtils.prototype.length = function(str) {
-  return str.length - (str.match(/[\uD800-\uDBFF][\uDC00-\uDFFFF]/g)||[]).length;  
+    return str.length - (str.match(/[\uD800-\uDBFF][\uDC00-\uDFFFF]/g)||[]).length;
 };
 
 StrUtils.prototype.charAt = function(str, offset) {
-  var pos = 0;
-  var length = str.length;
-  var cp = 0;
-  var size = 0;
-  var index = 0;
+    var pos = 0;
+    var length = str.length;
+    var cp = 0;
+    var size = 0;
+    var index = 0;
 
-  while (pos < length) {
-    cp = str.codePointAt(pos);
-    size = cp < 0x10000 ? 1 : 2;
+    while (pos < length) {
+        cp = str.codePointAt(pos);
+        size = cp < 0x10000 ? 1 : 2;
 
-    if (index === offset) {
-      return str.substr(pos, size);
+        if (index === offset) {
+            return str.substr(pos, size);
+        }
+
+        pos += size;
+        ++index;
     }
 
-    pos += size;
-    ++index;
-  }
-
-  return '';
+    return '';
 };
 
 StrUtils.prototype.reverse = function(str) {
-  var pos = 0;
-  var length = str.length;
-  var cp = 0;
-  var size = 0;
-  var ret = '';
+    var pos = 0;
+    var length = str.length;
+    var cp = 0;
+    var size = 0;
+    var ret = '';
 
-  while (pos < length) {
-    cp = str.codePointAt(pos);
-    size = cp < 0x10000 ? 1 : 2;
-    ret  = str.substr(pos, size) + ret;
-    pos += size;
-  }
+    while (pos < length) {
+        cp = str.codePointAt(pos);
+        size = cp < 0x10000 ? 1 : 2;
+        ret  = str.substr(pos, size) + ret;
+        pos += size;
+    }
 
-  return ret;
+    return ret;
 }
 
 StrUtils.prototype.substr = function(str, pos, length) {
-  var count = this.length(str);
-  var ret = '';
-  var last = pos + length - 1;
+    var count = this.length(str);
+    var ret = '';
+    var last = pos + length - 1;
 
-  for (var i = 0; i < count; ++i) {
+    for (var i = 0; i < count; ++i) {
 
-    if (i >= pos && last >= i) {
-      ret += this.charAt(str, i);
+        if (i >= pos && last >= i) {
+            ret += this.charAt(str, i);
+        }
+
+        if (i === last) {
+            return ret;
+        }
     }
 
-    if (i === last) {
-      return ret;
-    }
-  }
+    return ret;
+};
 
-  return ret;
+StrUtils.prototype.eachChar = function(str, callback) {
+    var pos = 0;
+    var length = str.length;
+    var cp = 0;
+    var size = 0;
+
+    while (pos < length) {
+        cp = str.codePointAt(pos);
+        size = cp < 0x10000 ? 1 : 2;
+        callback(str.substr(pos, size));
+        pos += size;
+    }
+};
+
+StrUtils.prototype.eachCodePoint = function(str, callback) {
+    var pos = 0;
+    var length = str.length;
+    var cp = 0;
+    var size = 0;
+
+    while (pos < length) {
+        cp = str.codePointAt(pos);
+        size = cp < 0x10000 ? 1 : 2;
+        callback(cp);
+        pos += size;
+    }
 };
 
 module.exports = new StrUtils;
