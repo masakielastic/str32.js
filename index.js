@@ -1,14 +1,14 @@
-function StrUtils() {
-    if (!(this instanceof StrUtils)) {
+function Str32Utils() {
+    if (!(this instanceof Str32Utils)) {
       return new StrUtils();
     }
 };
 
-StrUtils.prototype.length32 = function(str) {
+Str32Utils.prototype.length32 = function(str) {
     return str.length - (str.match(/[\uD800-\uDBFF][\uDC00-\uDFFFF]/g)||[]).length;
 };
 
-StrUtils.prototype.char32At = function(str, offset) {
+Str32Utils.prototype.char32At = function(str, offset) {
     var pos = 0;
     var length = str.length;
     var cp = 0;
@@ -30,7 +30,7 @@ StrUtils.prototype.char32At = function(str, offset) {
     return '';
 };
 
-StrUtils.prototype.substr32 = function(str, pos, length) {
+Str32Utils.prototype.substr32 = function(str, pos, length) {
     var count = this.length32(str);
     var ret = '';
     var last = pos + length - 1;
@@ -49,4 +49,4 @@ StrUtils.prototype.substr32 = function(str, pos, length) {
     return ret;
 };
 
-module.exports = new StrUtils;
+module.exports = new Str32Utils;
