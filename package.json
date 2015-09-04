@@ -1,8 +1,8 @@
 {
-  "name": "strutils.js",
+  "name": "str32.js",
   "version": "0.1.0",
   "repository": {
-    "url": "git@github.com:masakielastic/strutils.js.git"
+    "url": "git@github.com:masakielastic/str32.js.git"
   },
   "description": "String Utils for Surrogate pairs",
   "keywords": [
