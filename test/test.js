@@ -6,5 +6,9 @@ describe('StrUtils', function() {
 
   it('文字列の長さは3になる。', function() {
     assert(3, utils.length(str));
-  })
+  });
+
+  it('サロゲートペアを考慮して1文字取得する', function() {
+    assert('\uD842\uDFB7' === str.charAt(0));
+  });
 });
