@@ -27,7 +27,7 @@ console.log('\uD842\uDFB7野' === utils.substr32(str, 0, 2));
 将来の標準関数の候補
 -----------------
 
-`String.prototype.at` が提案されています。polyfill は[こちら](b.com/mathiasbynens/String.prototype.at)をご参照ください。
+`String.prototype.at` が提案されています。polyfill は[こちら](https://github.com/mathiasbynens/String.prototype.at)をご参照ください。
 
 
 ライセンス
