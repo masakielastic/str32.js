@@ -1,5 +1,5 @@
 {
-  "name": "node-strutils",
+  "name": "strutils.js",
   "version": "0.1.0",
   "description": "String Utils for Surrogate pairs",
   "keywords": [
