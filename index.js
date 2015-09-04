@@ -30,23 +30,6 @@ StrUtils.prototype.charAt = function(str, offset) {
     return '';
 };
 
-StrUtils.prototype.reverse = function(str) {
-    var pos = 0;
-    var length = str.length;
-    var cp = 0;
-    var size = 0;
-    var ret = '';
-
-    while (pos < length) {
-        cp = str.codePointAt(pos);
-        size = cp < 0x10000 ? 1 : 2;
-        ret  = str.substr(pos, size) + ret;
-        pos += size;
-    }
-
-    return ret;
-}
-
 StrUtils.prototype.substr = function(str, pos, length) {
     var count = this.length(str);
     var ret = '';
