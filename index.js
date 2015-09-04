@@ -1,8 +1,14 @@
-exports.length = function(str) {
+function StrUtils() {
+  if (!(this instanceof StrUtils)) {
+    return new StrUtils();
+  }
+};
+
+StrUtils.prototype.length = function(str) {
   return str.length - (str.match(/[\uD800-\uDBFF][\uDC00-\uDFFFF]/g)||[]).length;  
 };
 
-exports.charAt = function(str, offset) {
+StrUtils.prototype.charAt = function(str, offset) {
   var pos = 0;
   var length = str.length;
   var cp = 0;
@@ -22,9 +28,9 @@ exports.charAt = function(str, offset) {
   }
 
   return '';
-}
+};
 
-exports.reverse = function(str) {
+StrUtils.prototype.reverse = function(str) {
   var pos = 0;
   var length = str.length;
   var cp = 0;
@@ -40,3 +46,24 @@ exports.reverse = function(str) {
 
   return ret;
 }
+
+StrUtils.prototype.substr = function(str, pos, length) {
+  var count = this.length(str);
+  var ret = '';
+  var last = pos + length - 1;
+
+  for (var i = 0; i < count; ++i) {
+
+    if (i >= pos && last >= i) {
+      ret += this.charAt(str, i);
+    }
+
+    if (i === last) {
+      return ret;
+    }
+  }
+
+  return ret;
+};
+
+module.exports = new StrUtils;
