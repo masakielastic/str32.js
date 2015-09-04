@@ -4,11 +4,11 @@ function StrUtils() {
     }
 };
 
-StrUtils.prototype.length = function(str) {
+StrUtils.prototype.length32 = function(str) {
     return str.length - (str.match(/[\uD800-\uDBFF][\uDC00-\uDFFFF]/g)||[]).length;
 };
 
-StrUtils.prototype.charAt = function(str, offset) {
+StrUtils.prototype.char32At = function(str, offset) {
     var pos = 0;
     var length = str.length;
     var cp = 0;
@@ -30,15 +30,15 @@ StrUtils.prototype.charAt = function(str, offset) {
     return '';
 };
 
-StrUtils.prototype.substr = function(str, pos, length) {
-    var count = this.length(str);
+StrUtils.prototype.substr32 = function(str, pos, length) {
+    var count = this.length32(str);
     var ret = '';
     var last = pos + length - 1;
 
     for (var i = 0; i < count; ++i) {
 
         if (i >= pos && last >= i) {
-            ret += this.charAt(str, i);
+            ret += this.char32At(str, i);
         }
 
         if (i === last) {
